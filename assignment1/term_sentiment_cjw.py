@@ -46,12 +46,14 @@ def sentiment(fp, words):
         try:
             tweetraw = tweet[unicode('text')]
             #print tweetraw
-            tweettext = re.sub("[^A-Za-z]"," ",tweetraw)
+            tweettext = re.sub("[^A-Za-z\']"," ",tweetraw)
             tweettext = tweettext.lower()
             score = calctext(tweettext, words)
             tweetterms = tweettext.split()
             nterms = float(len(tweetterms))
             for term in tweetterms:
+                if words.has_key(term):
+                    continue
                 if terms.has_key(term):
                     terms[term].append(score/nterms)
                 else:
@@ -73,9 +75,9 @@ def sentiment(fp, words):
         scores = terms[term]
         num = len(scores)
         avg = sum(scores)/float(num)
-        print term, avg, num
+        print term, avg
         
-    print len(terms)
+    #print len(terms)
 def main():
     sent_file = open(sys.argv[1])
     tweet_file = open(sys.argv[2])
