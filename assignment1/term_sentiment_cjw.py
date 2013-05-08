@@ -50,9 +50,10 @@ def sentiment(fp, words):
             tweettext = tweettext.lower()
             score = calctext(tweettext, words)
             tweetterms = tweettext.split()
+            nterms = float(len(tweetterms))
             for term in tweetterms:
                 if terms.has_key(term):
-                    terms[term].append(score)
+                    terms[term].append(score/nterms)
                 else:
                     terms[term]= [score]
                     
