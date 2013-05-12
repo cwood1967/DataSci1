@@ -42,7 +42,7 @@ def sentiment(fp, words):
     tuser = unicode("user")
     for line in fp.readlines():
         tweet = json.loads(line)
-        
+        print "---"
         try:
             if tweet['lang'] != 'en':
                 continue
@@ -50,17 +50,21 @@ def sentiment(fp, words):
             score = calctext(tweettext, words)
             place = tweet['place']
             user = tweet[unicode('user')]
-            print "User ", user['location']
+            coo = tweet[unicode('coordinates')]
+            #print "User ", user['location'], coo, tweet['lang'], score
+            if  user['location']:
+                print  user['location']
             if place:
-                print place['full_name'], score, tweet['lang']
+                print "Place:", place['full_name']
             else:
-                print "no place ", tweet['lang']
+                pass
+                #print "no place ", tweet['lang']
         except Exception, e:
             #pass
             #print "Error", e, i
             score = 0
             
-        print score
+        #print score
 #         #if score < -15:print tweet
 #         if i > 400:
 #             break

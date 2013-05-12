@@ -46,8 +46,8 @@ def sentiment(fp, words):
         try:
             tweetraw = tweet[unicode('text')]
             #print tweetraw
-            tweettext = re.sub("[^A-Za-z\']"," ",tweetraw)
-            tweettext = tweettext.lower()
+            tweettext = re.sub("[^A-Za-z\'@]"," ",tweetraw)
+            #tweettext = tweettext.lower()
             score = calctext(tweettext, words)
             tweetterms = tweettext.split()
             nterms = float(len(tweetterms))
